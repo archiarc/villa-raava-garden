@@ -3,7 +3,7 @@ window.GARDEN = {
   place: "Bali",
   brief: "Lush tropical layers. No soil. No holes. Asymmetric height.",
   currency: "Rp",
-  note: "Quoted = TNT Household ServiceZ. Estimate = typical Bali nursery, confirm before buying. Soil, compost, planters and labour not included.",
+  note: "Quoted = TNT Household ServiceZ. Estimate = typical Bali nursery, confirm before buying. Soil, compost, planters and labour not included. Planning only — no purchasing, contractor commitment or irreversible work without Max’s approval.",
   plants: {
     areca: { name: "Areca palm, 2 m clump", latin: "Dypsis lutescens", idn: "Palem kuning", price: 500000, source: "quoted", layer: "Tall", light: "Sun / part sun", photo: "areca.jpg", flowers: false },
     bambooPalm: { name: "Bamboo palm", latin: "Chamaedorea seifrizii", idn: "Palem bambu", price: 250000, source: "estimate", layer: "Tall", light: "Part sun / shade", photo: "bamboo-palm.jpg", flowers: false },
@@ -52,17 +52,17 @@ window.GARDEN = {
       wall: "Narrow 5 m service slot between the bedroom wall and the opposite boundary wall. Seen from the bed through the window, and from the door looking down the alley. Same planting in both photos.",
       seen: "Bedroom window above the bed",
       light: "Shade at ground, sun on tops", water: "Roofed overhang — drip only",
-      goal: "Fill the whole window with green, including the upper third. Slim mixed plants in a long 60–80 cm slot — not a short courtyard.",
-      plan: "One repeating mix the full 5 m: areca clumps at irregular spacing, red ti and Dieffenbachia mixed among the trunks at window height, pothos / snake plant / peace lily at the base. Leave 60 cm by the door as groundcover so the heater stays reachable. Nothing grows from the window or inside the room.",
+      goal: "The bedroom window is 1.5 m above the bed: it must read as a wall of foliage, never as visible soil or a garden path. Dense palm trunks and leaves fill the whole window, especially the upper third.",
+      plan: "One dense repeating vertical mix through the full 5 m slot: existing areca plus two new areca and three bamboo palms. Dieffenbachia and a little red ti fill the middle between trunks. Groundcover exists below the window sill and is not visible from the bed. Keep the heater accessible from the door.",
       mix: ["areca", "bambooPalm", "cordyline", "dieffenbachia", "peace", "snake", "pothos"],
       map: {
-        axis: "Door / heater → far areca · 5 m × 60–80 cm",
+        axis: "Door / heater → far areca · 5 m × 60–80 cm · window sill at 1.5 m",
         stations: [
-          { n: 1, at: "0–0.6 m", plants: "Pothos only. Keep the heater reachable." },
-          { n: 2, at: "0.6–1.5 m", plants: "Snake plants + peace lily at the house wall." },
-          { n: 3, at: "1.5–2.5 m", plants: "New 2 m areca. Red ti + Dieffenbachia mixed at the trunks." },
-          { n: 4, at: "2.5–3.5 m", plants: "Bamboo palm. Same mid mix, not a red stripe." },
-          { n: 5, at: "3.5–5 m", plants: "Keep existing areca. Pothos carpet to the end." }
+          { n: 1, at: "0–0.6 m", plants: "Access gap at ground level. Palm foliage may screen it above the sill." },
+          { n: 2, at: "0.6–1.8 m", plants: "New areca + bamboo palm, Dieffenbachia between the trunks." },
+          { n: 3, at: "1.8–3.2 m", plants: "Two bamboo palms + a new areca. Dense leaves at window height." },
+          { n: 4, at: "3.2–5 m", plants: "Keep existing areca; repeat bamboo-palm foliage and middle layer." },
+          { n: 5, at: "Below sill", plants: "Snake plant, peace lily and pothos cover soil but stay below the bedroom sightline." }
         ]
       },
       keep: "Existing areca clump at the far end.",
@@ -71,18 +71,18 @@ window.GARDEN = {
         { before: "zone1-2-alley-from-door.jpg", after: "after-zone1-2-alley-from-door.jpg", label: "From the door" }
       ],
       layers: {
-        tall: "New 2 m areca on the empty near end, slim bamboo palm in the middle, existing areca at the far end.",
-        mid: "Four red ti plants and three large Dieffenbachia at window height.",
-        low: "Peace lilies, yellow-edged snake plants along the house wall, pothos carpet. Leave 60 cm by the door clear."
+        tall: "Two new 2 m areca clumps plus three bamboo palms, with the existing far areca — dense foliage across the whole window.",
+        mid: "Six large Dieffenbachia and four red ti plants mixed between palm trunks.",
+        low: "Peace lilies, snake plants and pothos cover soil below the 1.5 m sill; they are not the bedroom view."
       },
       buy: [
-        { plant: "areca", qty: 1, why: "Tall anchor on the empty left" },
-        { plant: "bambooPalm", qty: 1, why: "Slim height in the middle" },
-        { plant: "cordyline", qty: 4, why: "Red colour at window height" },
-        { plant: "dieffenbachia", qty: 3, why: "Big pale leaves fill the middle" },
-        { plant: "peace", qty: 3, why: "White flowers in shade" },
-        { plant: "snake", qty: 6, why: "Upright line under the window" },
-        { plant: "pothos", qty: 12, why: "Cheap carpet over all soil" }
+        { plant: "areca", qty: 2, why: "Dense tall anchors across the window" },
+        { plant: "bambooPalm", qty: 3, why: "Slim palm foliage filling upper and middle gaps" },
+        { plant: "cordyline", qty: 4, why: "Small red accents between green trunks" },
+        { plant: "dieffenbachia", qty: 6, why: "Large green-white leaves at window height" },
+        { plant: "peace", qty: 4, why: "Shade-tolerant cover below the sill" },
+        { plant: "snake", qty: 8, why: "Upright cover along the house wall below view" },
+        { plant: "pothos", qty: 16, why: "Cover all soil below the sill" }
       ]
     },
     {
@@ -90,8 +90,8 @@ window.GARDEN = {
       wall: "Indoor light well behind the bedroom glass, from the desk panel to the shower. Same bed in both photos. Plants only behind the glass.",
       seen: "Bedroom glass wall and the shower",
       light: "Bright filtered, no direct sun", water: "Transparent roof — no rain, humid from shower",
-      goal: "Even mid and tall along all three glass panels so the white wall almost disappears behind plant volume. Pink mixed along the whole length. Nothing on the bedroom floor.",
-      plan: "Repeating mix behind the glass only: Alocasia, bamboo palm, existing areca and Chamaedorea at irregular heights; Dieffenbachia mixed through; Stromanthe and pink Aglaonema in small groups the full length with ferns, spider plants and pothos. Hide the wall with foliage, not a green covering.",
+      goal: "Dense at all three levels along every glass panel: soil fully covered, a continuous lush middle, and palms / big leaves carrying green to the breeze blocks. Nothing on the bedroom or shower floor.",
+      plan: "Repeat a denser mix behind the glass only. Two Alocasia and two bamboo palms reinforce the existing areca and Chamaedorea at the top. Five Dieffenbachia fill the middle. Stromanthe and pink Aglaonema stay as dispersed accents, with a heavy fern, spider-plant and pothos base.",
       mix: ["alocasia", "bambooPalm", "dieffenbachia", "stromanthe", "aglaonema", "peace", "boston", "spider", "pothos"],
       map: {
         axis: "Desk panel → shower, behind glass only · 3.5–4 m × 1 m",
@@ -107,20 +107,20 @@ window.GARDEN = {
         { before: "zone2-2-from-shower.jpg", after: "after-zone2-2-from-shower.jpg", label: "From the shower" }
       ],
       layers: {
-        tall: "Alocasia on the desk side, bamboo palm, existing areca, Chamaedorea at the shower end — irregular heights.",
-        mid: "Dieffenbachia mixed through the whole run, not in a block.",
-        low: "Stromanthe and pink Aglaonema in small groups along the full glass line, mixed with ferns, spider plants and pothos."
+        tall: "Two Alocasia and two bamboo palms reinforce the existing areca and Chamaedorea across all three panels.",
+        mid: "Five large Dieffenbachia, six Stromanthe and six pink Aglaonema mixed continuously — no empty panel.",
+        low: "Peace lilies, eight Boston ferns, six spider plants and eight pothos hide every centimetre of soil."
       },
       buy: [
-        { plant: "alocasia", qty: 1, why: "Huge leaves on the empty desk side" },
-        { plant: "bambooPalm", qty: 1, why: "Fills the white band to the breeze blocks" },
-        { plant: "dieffenbachia", qty: 3, why: "Pale leaves mixed through the run" },
-        { plant: "stromanthe", qty: 4, why: "Pink repeated along the full glass line" },
-        { plant: "aglaonema", qty: 4, why: "Pink mixed, not one block" },
-        { plant: "peace", qty: 3, why: "White flowers in this light" },
-        { plant: "boston", qty: 6, why: "Feathery carpet, no soil" },
-        { plant: "spider", qty: 4, why: "Striped spill along the glass" },
-        { plant: "pothos", qty: 6, why: "Mix through the low layer" }
+        { plant: "alocasia", qty: 2, why: "Big upper leaves at both ends" },
+        { plant: "bambooPalm", qty: 2, why: "Slim height between existing palms" },
+        { plant: "dieffenbachia", qty: 5, why: "Continuous middle-level volume" },
+        { plant: "stromanthe", qty: 6, why: "Patterned accents mixed along the whole run" },
+        { plant: "aglaonema", qty: 6, why: "Pink accents dispersed, never blocked" },
+        { plant: "peace", qty: 5, why: "Dense shade-tolerant lower layer" },
+        { plant: "boston", qty: 8, why: "Feathery floor cover" },
+        { plant: "spider", qty: 6, why: "Striped spill along the glass" },
+        { plant: "pothos", qty: 8, why: "Close all remaining low gaps" }
       ]
     },
     {
@@ -128,8 +128,8 @@ window.GARDEN = {
       wall: "10 m rear service strip behind the living-room glass, toilet window and pool-end door. Same mix in every photo of this wall.",
       seen: "Living room glass, toilet window, pool end",
       light: "Part sun on tops, shade at base", water: "Open sky — rain in wet season",
-      goal: "An impressive jungle from the living room. Hide the white wall with real plant volume, not a painted green wall. Neighbour partly screened upstairs.",
-      plan: "One mix the full 10 m: keep the lipstick palm; add areca off-centre; Alocasia, Dieffenbachia, red ginger and pink Aglaonema interplanted; ferns and pothos covering soil. Big leaves near the frosted toilet window.",
+      goal: "A taller, greener rear jungle dominated by palms and large leaves. Use colour sparingly. Hide the white wall with real plant volume and preserve the neighbouring buildings and outdoor depth.",
+      plan: "Keep the lipstick palm, but make the structure mostly green: three new areca clumps and six Alocasia create height and big leaves; eight Dieffenbachia form a green middle. Use only four red gingers and three pink Aglaonema as dispersed accents. Ferns, pothos and spider plants close the ground.",
       mix: ["areca", "alocasia", "dieffenbachia", "alpinia", "aglaonema", "boston", "pothos", "spider"],
       map: {
         axis: "Shower / living glass → toilet window → pool door · 10 m × 0.8–1 m",
@@ -149,19 +149,19 @@ window.GARDEN = {
         { before: "zone3-5-from-pool-end.jpg", after: "after-zone3-5-from-pool-end.jpg", label: "From the pool end" }
       ],
       layers: {
-        tall: "Keep lipstick palm. Add two extra 2 m areca clumps off-centre to screen the neighbour.",
-        mid: "Elephant ears, Dieffenbachia, red ginger, pink Aglaonema.",
-        low: "Boston ferns, pothos and spider plants covering every centimetre of soil."
+        tall: "Keep lipstick palm. Add three 2 m areca clumps and six large Alocasia distributed through the full 10 m.",
+        mid: "Eight Dieffenbachia dominate; only four red gingers and three pink Aglaonema as accents.",
+        low: "Eighteen Boston ferns, twenty-two pothos and twelve spider plants cover all soil."
       },
       buy: [
-        { plant: "areca", qty: 2, why: "Off-centre height to screen the neighbour" },
-        { plant: "alocasia", qty: 3, why: "Huge silhouette leaves at the toilet window" },
-        { plant: "dieffenbachia", qty: 6, why: "Pale leaves filling the living-room glass" },
-        { plant: "alpinia", qty: 8, why: "Red flower spikes in the middle band" },
-        { plant: "aglaonema", qty: 8, why: "Pink foliage in shade gaps" },
-        { plant: "boston", qty: 15, why: "Feathery soil cover along 10 m" },
-        { plant: "pothos", qty: 20, why: "Fast carpet, no soil" },
-        { plant: "spider", qty: 10, why: "Spill and fill at the base" }
+        { plant: "areca", qty: 3, why: "More continuous green height and neighbour screening" },
+        { plant: "alocasia", qty: 6, why: "Large green leaves at all major viewpoints" },
+        { plant: "dieffenbachia", qty: 8, why: "Green middle layer along the full run" },
+        { plant: "alpinia", qty: 4, why: "Restrained red flower accents" },
+        { plant: "aglaonema", qty: 3, why: "Small dispersed pink accents" },
+        { plant: "boston", qty: 18, why: "Feathery soil cover along 10 m" },
+        { plant: "pothos", qty: 22, why: "Fast green carpet, no soil" },
+        { plant: "spider", qty: 12, why: "Spill and close low gaps" }
       ]
     },
     {
@@ -169,16 +169,16 @@ window.GARDEN = {
       wall: "L-shaped bed against the two pool boundary walls. Wide view, right wall and back wall are the same planting, not three different schemes.",
       seen: "Pool, loungers, the house",
       light: "Full sun much of the day", water: "Open sky — rain in wet season",
-      goal: "Blended tropical edge. Green-dominant low layer. Flowers mixed through, not a purple stripe then a red block then a green block.",
-      plan: "Keep the palms. Mid layer: red button ginger, parrot heliconia, croton and ixora INTERPLANTED the whole L. Low: mostly mondo grass, with heather and pentas as specks woven through — not a solid flower band.",
-      mix: ["costus", "alpinia", "parrot", "croton", "ixora", "heather", "pentas", "mondo"],
+      goal: "One coherent L-shaped pool garden from every angle. A mostly green low carpet with small flowers, one repeatable lush middle mix with dispersed flowers, and the existing palms above.",
+      plan: "Use the exact same six-plant palette through the right wall, corner and back wall. Low: mondo grass as the continuous green base with pentas only as scattered small flowers. Middle: orange jasmine and red button ginger as the main green mass, with parrot heliconia and a few crotons repeated irregularly. Existing palms remain the only tall layer.",
+      mix: ["murraya", "costus", "parrot", "croton", "pentas", "mondo"],
       map: {
         axis: "Right wall → corner → back wall · one L-bed",
         stations: [
-          { n: 1, at: "Right wall", plants: "Keep palms. Croton, parrot heliconia, red ginger, ixora mixed." },
-          { n: 2, at: "Corner", plants: "Same mid mix. No colour change at the turn." },
-          { n: 3, at: "Back wall", plants: "Same mid mix under the palms." },
-          { n: 4, at: "Pool edge, whole L", plants: "Mondo grass as the line. Heather / pentas only as specks." }
+          { n: 1, at: "Right wall", plants: "Keep palms. Repeat orange jasmine, red button ginger, parrot heliconia and a few crotons." },
+          { n: 2, at: "Corner", plants: "Continue the exact same six-plant palette around the turn." },
+          { n: 3, at: "Back wall", plants: "Repeat the same middle proportions under the palms." },
+          { n: 4, at: "Pool edge, whole L", plants: "Continuous mondo grass base with scattered pentas — never a flower stripe." }
         ]
       },
       keep: "All existing areca clumps and Christmas palms.",
@@ -188,35 +188,34 @@ window.GARDEN = {
         { before: "zone4-3-back-wall.jpg", after: "after-zone4-3-back-wall.jpg", label: "Back wall" }
       ],
       layers: {
-        tall: "Keep the palms. Feed them. Do not add more height.",
-        mid: "Red button ginger as the mass, plus red ginger, parrot heliconia, crotons and red ixora from 0.5–2.5 m.",
-        low: "Mostly mondo grass along the water. Heather and pentas only as specks, never a flower band.",
+        tall: "Keep the existing palms as the only tall rhythm.",
+        mid: "Sixteen orange jasmine, twenty red button ginger, twelve parrot heliconia and six crotons — the same proportions through the whole L.",
+        low: "Sixty mondo grass form the continuous green base; ten pentas are scattered individually, never planted as a band."
       },
       buy: [
-        { plant: "costus", qty: 25, why: "Main red-flower mass between palm trunks" },
-        { plant: "alpinia", qty: 12, why: "Taller red spikes in the middle band" },
-        { plant: "parrot", qty: 15, why: "Orange-red flowers all year" },
-        { plant: "croton", qty: 10, why: "Colour against the white wall" },
-        { plant: "ixora", qty: 12, why: "Compact red flowers in sun" },
-        { plant: "heather", qty: 30, why: "Tiny purple flowers along the pool edge" },
-        { plant: "pentas", qty: 20, why: "Star flowers, butterflies, neat edge" },
-        { plant: "mondo", qty: 40, why: "Clean grassy line that does not flop into the water" }
+        { plant: "murraya", qty: 16, why: "Evergreen middle structure repeated in every angle" },
+        { plant: "costus", qty: 20, why: "Main flowering green mass through the whole L" },
+        { plant: "parrot", qty: 12, why: "Repeated orange-red flower accents" },
+        { plant: "croton", qty: 6, why: "Sparse foliage accents, never blocks" },
+        { plant: "pentas", qty: 10, why: "Individual small flowers inside the low green base" },
+        { plant: "mondo", qty: 60, why: "Continuous green pool-edge carpet" }
       ]
     },
     {
       id: 5, name: "Dining terrace", size: "10 m × 3–4 m",
-      wall: "Long left wall of even grey troughs, plus a quieter back wall with art/mirror. One repeating mix in the troughs.",
+      wall: "Long left wall of even grey pots, plus a quiet back wall. One repeating mix in the pots.",
       seen: "Dining table and the path past it",
       light: "Bright, dappled through branches", water: "Glass roof — no rain",
-      goal: "Even troughs packed against the left wall, similar mature height the whole length. Art and a mirror on the back wall. No gym ladder.",
-      plan: "One row of matching troughs: bird of paradise, Monstera, rubber plant, pothos and spider plants repeating. Back wall is furniture/art, not a second planting scheme.",
+      goal: "A longer, lighter terrace: smaller matching pots tight to the left wall, with three hanging pots placed here and there. Preserve the original fan, floor, dining furniture and architecture.",
+      plan: "Use eight smaller matching grey pots along the left wall. Repeat bird of paradise, Monstera, the existing rubber plant, pothos and spider plants at a similar height. Add only three widely spaced hanging pots with pothos / heartleaf. Preserve the original ceiling fan, plank-pattern floor, table and chairs. Keep the back wall simple; remove only the gym ladder.",
       mix: ["bop", "monstera", "pothos", "spider", "heartleaf"],
       map: {
-        axis: "Left wall troughs, house → back wall · one even row",
+        axis: "Left wall pots, house → back wall · small matching modules",
         stations: [
-          { n: 1, at: "Left wall, full length", plants: "Matching grey troughs. Bird of paradise, Monstera, rubber plant repeating." },
-          { n: 2, at: "Trough lips", plants: "Pothos and spider plants spilling, same on every trough." },
-          { n: 3, at: "Back wall", plants: "Art + rattan mirror. No gym ladder. Not a second planting scheme." }
+          { n: 1, at: "Left wall, full length", plants: "Smaller matching grey pots. Bird of paradise, Monstera and existing rubber plant repeated." },
+          { n: 2, at: "Pot edges", plants: "Pothos and spider plants spilling from selected pots, not one heavy trough." },
+          { n: 3, at: "Pergola", plants: "Three hanging pots only, spaced irregularly with pothos / heartleaf." },
+          { n: 4, at: "Back wall", plants: "Keep simple. Remove only the gym ladder; preserve fan, floor and furniture." }
         ]
       },
       keep: "Existing bird of paradise, rubber plant, Monstera and pothos in the troughs — bulk them up.",
@@ -224,16 +223,16 @@ window.GARDEN = {
         { before: "zone5-1-dining-terrace.jpg", after: "after-zone5-1-dining-terrace.jpg", label: "Whole terrace" }
       ],
       layers: {
-        tall: "Bird of paradise and rubber plant in the left troughs, reaching up the wall.",
-        mid: "Monstera and mixed foliage packed against the left wall. Art plus a round rattan mirror on the back wall.",
-        low: "Spider plants and pothos spilling over trough edges. Hanging planters from the pergola."
+        tall: "Bird of paradise and the existing rubber plant in smaller pots along the left wall.",
+        mid: "Monstera and mixed foliage repeated in the small wall pots; preserve the original room layout.",
+        low: "Spider plants and pothos spill from selected pots. Three pothos / heartleaf hanging pots are spaced along the pergola."
       },
       buy: [
-        { plant: "bop", qty: 3, why: "Orange flowers packed against the left wall" },
-        { plant: "monstera", qty: 2, why: "Big leaves in the troughs" },
-        { plant: "pothos", qty: 8, why: "Spill and hanging baskets" },
-        { plant: "spider", qty: 8, why: "Striped cascade over the trough lip" },
-        { plant: "heartleaf", qty: 4, why: "Hanging from the pergola" }
+        { plant: "bop", qty: 4, why: "Upright anchors distributed among eight small wall pots" },
+        { plant: "monstera", qty: 3, why: "Big leaves in selected wall pots" },
+        { plant: "pothos", qty: 10, why: "Pot-edge spill plus hanging pots" },
+        { plant: "spider", qty: 8, why: "Light striped spill from selected pots" },
+        { plant: "heartleaf", qty: 5, why: "Three hanging pots plus two wall-pot accents" }
       ]
     },
     {
@@ -241,16 +240,16 @@ window.GARDEN = {
       wall: "One 10 m raised bed along the right boundary wall. Both walkway photos show the same continuous mix and a consistent high line.",
       seen: "Everyone arriving",
       light: "Bright, some sun patches", water: "Glass roof — drip. Last 1–2 m open",
-      goal: "One mixed tropical tunnel. Consistent low spill and an even-ish high line above 2.2 m. Path stays clear.",
-      plan: "Repeat the whole length: heliconia + areca at irregular spacing, tops forming a high line; red ti mixed through; ferns, spider plants and plectranthus spilling the curb. Pothos from beam boxes.",
-      mix: ["heliconia", "areca", "cordyline", "boston", "spider", "plectranthus", "pothos", "heartleaf"],
+      goal: "A continuous tall green passage: palms and heliconia run the full 10 m and curve inward above head height to form a clear half-arc. The middle is mostly large green foliage with only four red accents; the lower edge is one simple green ribbon.",
+      plan: "Repeat tall heliconia and areca from the house end to the entrance, visibly bending over the path only above 2.2 m. Fill the middle continuously with twelve Dieffenbachia and only four red ti. Simplify the lower edge to Boston fern and spider plant along the right curb. Remove the left-side pot and any left foreground flower. No hanging boxes.",
+      mix: ["heliconia", "areca", "cordyline", "dieffenbachia", "boston", "spider"],
       map: {
         axis: "House end → entrance, RIGHT bed only · 10 m × 0.5 m",
         stations: [
-          { n: 1, at: "Right bed, full length", plants: "Heliconia + areca at irregular spacing. Tops above 2.2 m." },
-          { n: 2, at: "Mid against the wall", plants: "Red ti mixed through, not a red stripe." },
-          { n: 3, at: "Curb", plants: "Ferns, spider plants, plectranthus spilling. Path stays clear." },
-          { n: 4, at: "Left house wall", plants: "No planting. Keep the white wall." }
+          { n: 1, at: "Right bed, full 10 m", plants: "Heliconia + four areca clumps repeated continuously; canopy bends above 2.2 m." },
+          { n: 2, at: "Middle, full 10 m", plants: "Twelve Dieffenbachia make a green middle; only four red ti are dispersed accents." },
+          { n: 3, at: "Right curb", plants: "Boston fern and spider plant intermix as one irregular lower ribbon." },
+          { n: 4, at: "Left house wall", plants: "No plants or pots. Keep the white wall and path clear." }
         ]
       },
       keep: "Existing heliconia (it will regrow) and areca clumps at both ends.",
@@ -259,91 +258,90 @@ window.GARDEN = {
         { before: "zone6-2-walkway-toward-entrance.jpg", after: "after-zone6-2-walkway-toward-entrance.jpg", label: "Toward the entrance" }
       ],
       layers: {
-        tall: "Heliconia plus 2 extra areca clumps leaning over only above head height.",
-        mid: "Red ti plants hugging the wall.",
-        low: "Ferns, spider plants and plectranthus spilling over the curb. Trailing boxes on the beams."
+        tall: "Twelve tall heliconia and four extra areca clumps run the full 10 m, curving inward above 2.2 m to form a visible half-arc.",
+        mid: "Twelve Dieffenbachia form the green middle, with only four red ti as accents.",
+        low: "One irregular ribbon: sixteen Boston ferns and twelve spider plants at the curb."
       },
       buy: [
-        { plant: "heliconia", qty: 6, why: "Paddle leaves and hanging red-yellow flowers" },
-        { plant: "areca", qty: 2, why: "Asymmetric canopy over the path" },
-        { plant: "cordyline", qty: 8, why: "Red wall line, slim at the base" },
-        { plant: "boston", qty: 15, why: "Lush spill over the curb" },
-        { plant: "spider", qty: 12, why: "Soft edge, no sharp leaves at face height" },
-        { plant: "plectranthus", qty: 15, why: "Cream-edged cascade over the curb" },
-        { plant: "pothos", qty: 12, why: "Hanging from beam planters" },
-        { plant: "heartleaf", qty: 8, why: "Hanging from beam planters" }
+        { plant: "heliconia", qty: 12, why: "Continuous tall paddle-leaf rhythm and overhead arc" },
+        { plant: "areca", qty: 4, why: "Complete the high half-arc above head level" },
+        { plant: "cordyline", qty: 4, why: "Only four restrained red middle accents" },
+        { plant: "dieffenbachia", qty: 12, why: "Predominantly green middle layer" },
+        { plant: "boston", qty: 16, why: "Simple irregular lower ribbon" },
+        { plant: "spider", qty: 12, why: "Soft green curb edge" }
       ]
     },
     {
       id: 7, name: "Street frontage", size: "Corner 1 × 1 m + 2 grey troughs",
-      wall: "Three pieces of one entrance: modest bougainvillea left of the gate, simple grey troughs, and the 1×1 m palm bed. Same restrained language in all three photos.",
+      wall: "One street composition with four controlled parts: small grey flower pots on the left, a young pink bougainvillea tree in the pot right of the door, the existing palm with only 3–5 underplants in the right corner, and the balcony edge above.",
       seen: "The street and arriving guests",
       light: "Full sun, reflected heat, dust", water: "Open sky — rain in wet season",
-      goal: "Restrained first impression. Flowers on the left. Sign stays clear. Palm bed lusher only in the inner metre — not a flower carpet on the floor.",
-      plan: "Bougainvillea left of the gate, not over the lettering. Troughs: parrot heliconia, a little ixora, plumbago. Palm corner: crotons and ti in the middle of the 1×1 m, light groundcover, not a flower explosion.",
-      mix: ["bougainvillea", "croton", "cordyline", "heather", "pentas", "parrot", "plumbago"],
+      goal: "A precise four-part frontage: two small grey flower pots on the left; one young pink bougainvillea tree in the same white pot right of the door in every view; the corner palm with exactly four underplants; and the balcony edge with short full-width Lee Kuan Yew trails plus restrained bushes and flowers.",
+      plan: "Left: two small grey pots, each with 30–50 cm ixora, pentas and plumbago. Door: one young standard pink bougainvillea in the white pot immediately right of the door, unchanged across views. Right corner: keep the palm with exactly two crotons and two red ti around its trunk. Balcony facade: Lee Kuan Yew trails 30–50 cm across the full edge, with low orange jasmine and scattered ixora/pentas above. Wall and lettering remain visible.",
+      mix: ["bougainvillea", "murraya", "ixora", "pentas", "plumbago", "croton", "cordyline", "lky"],
       map: {
-        axis: "Left of gate → troughs → 1×1 m palm bed",
+        axis: "Left grey pots → door pot → palm corner → balcony edge",
         stations: [
-          { n: 1, at: "Left of gate", plants: "One modest pink bougainvillea. Lettering stays readable." },
-          { n: 2, at: "Grey troughs", plants: "Parrot heliconia, a little ixora, plumbago. Not overflowing." },
-          { n: 3, at: "Palm bed, inner 1×1 m", plants: "Crotons + ti in the middle. Light groundcover. No flower carpet on the paving." }
+          { n: 1, at: "Left of entrance", plants: "Two small grey pots with 30–50 cm ixora, pentas and plumbago." },
+          { n: 2, at: "White pot right of door", plants: "One young pink bougainvillea tree; same pot and underplanting in every view." },
+          { n: 3, at: "Right corner", plants: "Keep palm. Exactly four companions: two crotons + two red ti." },
+          { n: 4, at: "Balcony facade", plants: "Lee Kuan Yew trails 30–50 cm across the width; restrained orange jasmine and scattered flowers above." }
         ]
       },
       keep: "Christmas palm in the corner. Wooden gate and Villa Raava lettering.",
       photos: [
         { before: "zone7-2-gate-and-sign.jpg", after: "after-zone7-2-gate-and-sign.jpg", label: "Gate and sign" },
         { before: "zone7-1-street-corner-palm.jpg", after: "after-zone7-1-street-corner-palm.jpg", label: "Street corner" },
-        { before: "zone7-3-grey-troughs.jpg", after: "after-zone7-3-grey-troughs.jpg", label: "Grey troughs" }
+        { before: "zone7-3-grey-troughs.jpg", after: "after-zone7-3-grey-troughs.jpg", label: "Grey pots" },
+        { before: "zone7-4-facade-upper-planter.jpg", after: "after-zone7-4-facade-upper-planter.jpg", label: "Balcony facade" }
       ],
       layers: {
-        tall: "One modest pink bougainvillea left of the gate. Existing Christmas palm.",
-        mid: "A few crotons and red ti around the palm, not a flower wall.",
-        low: "Light groundcover in the palm bed. Simple mix in the grey troughs."
+        tall: "One young pink bougainvillea tree in the white pot right of the door. Keep the existing corner palm.",
+        mid: "Two left grey pots: 30–50 cm ixora, pentas and plumbago. Palm corner: only two crotons and two red ti.",
+        low: "Balcony edge: orange jasmine and scattered compact flowers; Lee Kuan Yew trails only 30–50 cm."
       },
       buy: [
-        { plant: "bougainvillea", qty: 1, why: "Modest flowering plant left of the gate" },
-        { plant: "croton", qty: 4, why: "Colour in the middle of the palm bed" },
-        { plant: "cordyline", qty: 3, why: "Upright red around the palm" },
-        { plant: "heather", qty: 8, why: "Simple soil cover" },
-        { plant: "pentas", qty: 6, why: "A few star flowers, not a mass" },
-        { plant: "parrot", qty: 2, why: "Back of the grey troughs" },
-        { plant: "plumbago", qty: 3, why: "A little spill over the trough fronts" }
+        { plant: "bougainvillea", qty: 1, why: "Young pink tree in the white pot right of the door" },
+        { plant: "murraya", qty: 4, why: "Green balcony-edge bushes" },
+        { plant: "ixora", qty: 6, why: "30–50 cm flowers in two grey pots and balcony edge" },
+        { plant: "pentas", qty: 6, why: "Compact flowers in two grey pots and balcony edge" },
+        { plant: "plumbago", qty: 4, why: "Soft flowering spill from two grey pots" },
+        { plant: "croton", qty: 2, why: "Two of four plants around the corner palm" },
+        { plant: "cordyline", qty: 2, why: "Two of four plants around the corner palm" },
+        { plant: "lky", qty: 20, why: "Full-width balcony edge with controlled 30–50 cm trails" }
       ]
     },
     {
       id: 8, name: "Balcony planter", size: "Long planter ~0.8–1 m wide",
-      wall: "One balcony-width planter. Chair view, close-up and street facade must show the same mix and the same height — not a green bomb on the facade.",
-      seen: "Balcony chair, the street, neighbours opposite",
+      wall: "One balcony-width planter seen from the chair and close-up. Existing areca remains above; the new design is a neat 40–60 cm green fence with a lush low carpet.",
+      seen: "Balcony chair and planter close-up",
       light: "Full sun, strong afternoon", water: "Roofed — only rain blown in",
-      goal: "Accurate privacy fence, similar height left to right, a bit lower than a roof bomb. Simple flowers at the soil. Street view stays within the planter width.",
-      plan: "Keep arecas. Bamboo palms as a fence in the gaps, even-ish height. One lipstick palm accent. Heather and pentas covering soil. Light Lee Kuan Yew trail from the street, not a hedge over the wall.",
-      mix: ["bambooPalm", "lipstick", "heather", "pentas"],
+      goal: "Build a dense but controlled two-level planter: a continuous jungly 40–60 cm green fence below the existing areca, plus a lush low layer hiding all soil. No new tall plants and no flower bomb.",
+      plan: "Keep every existing areca as the only tall layer. Clip orange jasmine to 40–60 cm as one mostly green fence across the full planter. Cover the soil with mondo grass and Mexican heather, with only sparse pentas flower accents. Both interior balcony photos must show the same height and palette.",
+      mix: ["murraya", "mondo", "heather", "pentas"],
       map: {
-        axis: "Balcony planter left → right, one height",
+        axis: "Balcony planter left → right · one 40–60 cm fence",
         stations: [
-          { n: 1, at: "Planter, full length", plants: "Keep arecas. Bamboo palms in the gaps, even-ish height." },
-          { n: 2, at: "One accent", plants: "One lipstick palm, not a forest." },
-          { n: 3, at: "Soil", plants: "Heather and pentas only. No flower wall." },
-          { n: 4, at: "Street facade", plants: "Same planter only. Light Lee Kuan Yew trail, not a hedge over the wall." }
+          { n: 1, at: "Tall", plants: "Keep every existing areca only; add no new tall plants." },
+          { n: 2, at: "40–60 cm, full length", plants: "Clipped orange jasmine forms one continuous, mostly green fence." },
+          { n: 3, at: "Low, full length", plants: "Mondo grass and Mexican heather hide all soil; pentas appear only as sparse accents." }
         ]
       },
       keep: "Existing areca clumps.",
       photos: [
         { before: "zone8-1-balcony-wide.jpg", after: "after-zone8-1-balcony-wide.jpg", label: "From the chair" },
-        { before: "zone8-2-planter-closeup.jpg", after: "after-zone8-2-planter-closeup.jpg", label: "Planter close-up" },
-        { before: "zone7-4-facade-upper-planter.jpg", after: "after-zone7-4-facade-upper-planter.jpg", label: "From the street" }
+        { before: "zone8-2-planter-closeup.jpg", after: "after-zone8-2-planter-closeup.jpg", label: "Planter close-up" }
       ],
       layers: {
-        tall: "Keep arecas. Add bamboo palms as a fence in the gaps. One lipstick palm as an accent.",
-        mid: "The bamboo palm foliage is the privacy screen.",
-        low: "Mexican heather and pentas covering soil only."
+        tall: "Keep every existing areca; add no new tall plants.",
+        mid: "Sixteen orange jasmine shrubs form one clipped, mostly green 40–60 cm fence.",
+        low: "Thirty mondo grass and twelve Mexican heather hide soil, with six pentas as sparse flower accents."
       },
       buy: [
-        { plant: "bambooPalm", qty: 6, why: "Privacy fence between the areca trunks" },
-        { plant: "lipstick", qty: 1, why: "One red-stem accent, not a forest" },
-        { plant: "heather", qty: 10, why: "Simple soil cover" },
-        { plant: "pentas", qty: 8, why: "A few flowers at the base" }
+        { plant: "murraya", qty: 16, why: "Continuous clipped 40–60 cm green fence" },
+        { plant: "mondo", qty: 30, why: "Dense evergreen soil cover" },
+        { plant: "heather", qty: 12, why: "Fine-textured low layer" },
+        { plant: "pentas", qty: 6, why: "Sparse flower accents, not a flower wall" }
       ]
     },
     {
