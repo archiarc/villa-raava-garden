@@ -226,3 +226,23 @@ th { color: var(--muted); font-weight: 600; }
   font-size: 12px;
 }
 .mix-chip img { width: 28px; height: 28px; object-fit: cover; border-radius: 50%; }
+.wall-map { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.wall-axis { color: var(--muted); font-size: 13px; margin: 0 0 4px; }
+.wall-map li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+.wall-map b {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #1a1404;
+  display: grid; place-items: center;
+  font-size: 13px;
+}
+.wall-map span { color: var(--accent); font-size: 12px; font-weight: 600; }
+.wall-map p { margin: 2px 0 0; font-size: 14px; }

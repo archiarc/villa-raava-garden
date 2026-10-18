@@ -62,6 +62,14 @@
     return `<span class="mix-chip"><img src="assets/plants/${p.photo}" alt="">${p.name}</span>`;
   }).join("");
 
+  const wallMap = (z) => {
+    if (!z.map || !z.map.stations) return "";
+    return `<ol class="wall-map">
+      <p class="wall-axis">${z.map.axis}</p>
+      ${z.map.stations.map(s => `<li><b>${s.n}</b><div><span>${s.at}</span><p>${s.plants}</p></div></li>`).join("")}
+    </ol>`;
+  };
+
   const zoneCard = (z) => `
     <article class="card" data-open-zone="${z.id}">
       <div class="zone-hero"><img src="assets/after/${z.photos[0].after}" alt="${z.name}"></div>
@@ -98,6 +106,7 @@
           <div class="kicker">Planting map for this wall</div>
           <p class="wall-line">${z.wall || z.size}</p>
           <p>${z.plan || z.goal}</p>
+          ${wallMap(z)}
           <dl class="layers">
             <dt>Tall</dt><dd>${z.layers.tall}</dd>
             <dt>Middle</dt><dd>${z.layers.mid}</dd>

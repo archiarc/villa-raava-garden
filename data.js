@@ -55,6 +55,16 @@ window.GARDEN = {
       goal: "Fill the whole window with green, including the upper third. Slim mixed plants in a long 60–80 cm slot — not a short courtyard.",
       plan: "One repeating mix the full 5 m: areca clumps at irregular spacing, red ti and Dieffenbachia mixed among the trunks at window height, pothos / snake plant / peace lily at the base. Leave 60 cm by the door as groundcover so the heater stays reachable. Nothing grows from the window or inside the room.",
       mix: ["areca", "bambooPalm", "cordyline", "dieffenbachia", "peace", "snake", "pothos"],
+      map: {
+        axis: "Door / heater → far areca · 5 m × 60–80 cm",
+        stations: [
+          { n: 1, at: "0–0.6 m", plants: "Pothos only. Keep the heater reachable." },
+          { n: 2, at: "0.6–1.5 m", plants: "Snake plants + peace lily at the house wall." },
+          { n: 3, at: "1.5–2.5 m", plants: "New 2 m areca. Red ti + Dieffenbachia mixed at the trunks." },
+          { n: 4, at: "2.5–3.5 m", plants: "Bamboo palm. Same mid mix, not a red stripe." },
+          { n: 5, at: "3.5–5 m", plants: "Keep existing areca. Pothos carpet to the end." }
+        ]
+      },
       keep: "Existing areca clump at the far end.",
       photos: [
         { before: "zone1-1-bedroom-view.jpg", after: "after-zone1-1-bedroom-view.jpg", label: "From the bed" },
@@ -83,6 +93,14 @@ window.GARDEN = {
       goal: "Even mid and tall along all three glass panels so the white wall almost disappears behind plant volume. Pink mixed along the whole length. Nothing on the bedroom floor.",
       plan: "Repeating mix behind the glass only: Alocasia, bamboo palm, existing areca and Chamaedorea at irregular heights; Dieffenbachia mixed through; Stromanthe and pink Aglaonema in small groups the full length with ferns, spider plants and pothos. Hide the wall with foliage, not a green covering.",
       mix: ["alocasia", "bambooPalm", "dieffenbachia", "stromanthe", "aglaonema", "peace", "boston", "spider", "pothos"],
+      map: {
+        axis: "Desk panel → shower, behind glass only · 3.5–4 m × 1 m",
+        stations: [
+          { n: 1, at: "Desk panel", plants: "Alocasia + Dieffenbachia. Pink Aglaonema at the soil." },
+          { n: 2, at: "Centre glass", plants: "Bamboo palm + existing areca. Stromanthe mixed through." },
+          { n: 3, at: "Shower end", plants: "Existing Chamaedorea. Ferns, spider plants, pothos covering soil." }
+        ]
+      },
       keep: "Existing areca, two Chamaedorea palms, snake plants.",
       photos: [
         { before: "zone2-1-bedroom-glass-wall.jpg", after: "after-zone2-1-bedroom-glass-wall.jpg", label: "From the bedroom" },
@@ -113,6 +131,15 @@ window.GARDEN = {
       goal: "An impressive jungle from the living room. Hide the white wall with real plant volume, not a painted green wall. Neighbour partly screened upstairs.",
       plan: "One mix the full 10 m: keep the lipstick palm; add areca off-centre; Alocasia, Dieffenbachia, red ginger and pink Aglaonema interplanted; ferns and pothos covering soil. Big leaves near the frosted toilet window.",
       mix: ["areca", "alocasia", "dieffenbachia", "alpinia", "aglaonema", "boston", "pothos", "spider"],
+      map: {
+        axis: "Shower / living glass → toilet window → pool door · 10 m × 0.8–1 m",
+        stations: [
+          { n: 1, at: "Living-room glass", plants: "Keep lipstick palm. Areca off-centre. Alocasia + Dieffenbachia mixed." },
+          { n: 2, at: "Under stairs bank", plants: "Same mix. Pink Aglaonema in small groups, not one block." },
+          { n: 3, at: "Toilet window", plants: "Biggest Alocasia leaves for the frosted silhouette." },
+          { n: 4, at: "Pool-end door", plants: "Areca + red ginger + ferns. Soil covered." }
+        ]
+      },
       keep: "Lipstick palm, existing areca and Chamaedorea.",
       photos: [
         { before: "zone3-4-living-room-glass.jpg", after: "after-zone3-4-living-room-glass.jpg", label: "From the living room" },
@@ -145,6 +172,15 @@ window.GARDEN = {
       goal: "Blended tropical edge. Green-dominant low layer. Flowers mixed through, not a purple stripe then a red block then a green block.",
       plan: "Keep the palms. Mid layer: red button ginger, parrot heliconia, croton and ixora INTERPLANTED the whole L. Low: mostly mondo grass, with heather and pentas as specks woven through — not a solid flower band.",
       mix: ["costus", "alpinia", "parrot", "croton", "ixora", "heather", "pentas", "mondo"],
+      map: {
+        axis: "Right wall → corner → back wall · one L-bed",
+        stations: [
+          { n: 1, at: "Right wall", plants: "Keep palms. Croton, parrot heliconia, red ginger, ixora mixed." },
+          { n: 2, at: "Corner", plants: "Same mid mix. No colour change at the turn." },
+          { n: 3, at: "Back wall", plants: "Same mid mix under the palms." },
+          { n: 4, at: "Pool edge, whole L", plants: "Mondo grass as the line. Heather / pentas only as specks." }
+        ]
+      },
       keep: "All existing areca clumps and Christmas palms.",
       photos: [
         { before: "zone4-1-pool-wide.jpg", after: "after-zone4-1-pool-wide.jpg", label: "Wide pool view" },
@@ -154,7 +190,7 @@ window.GARDEN = {
       layers: {
         tall: "Keep the palms. Feed them. Do not add more height.",
         mid: "Red button ginger as the mass, plus red ginger, parrot heliconia, crotons and red ixora from 0.5–2.5 m.",
-        low: "Mexican heather, pentas and mondo grass as a tidy pool-edge border."
+        low: "Mostly mondo grass along the water. Heather and pentas only as specks, never a flower band.",
       },
       buy: [
         { plant: "costus", qty: 25, why: "Main red-flower mass between palm trunks" },
@@ -175,6 +211,14 @@ window.GARDEN = {
       goal: "Even troughs packed against the left wall, similar mature height the whole length. Art and a mirror on the back wall. No gym ladder.",
       plan: "One row of matching troughs: bird of paradise, Monstera, rubber plant, pothos and spider plants repeating. Back wall is furniture/art, not a second planting scheme.",
       mix: ["bop", "monstera", "pothos", "spider", "heartleaf"],
+      map: {
+        axis: "Left wall troughs, house → back wall · one even row",
+        stations: [
+          { n: 1, at: "Left wall, full length", plants: "Matching grey troughs. Bird of paradise, Monstera, rubber plant repeating." },
+          { n: 2, at: "Trough lips", plants: "Pothos and spider plants spilling, same on every trough." },
+          { n: 3, at: "Back wall", plants: "Art + rattan mirror. No gym ladder. Not a second planting scheme." }
+        ]
+      },
       keep: "Existing bird of paradise, rubber plant, Monstera and pothos in the troughs — bulk them up.",
       photos: [
         { before: "zone5-1-dining-terrace.jpg", after: "after-zone5-1-dining-terrace.jpg", label: "Whole terrace" }
@@ -200,6 +244,15 @@ window.GARDEN = {
       goal: "One mixed tropical tunnel. Consistent low spill and an even-ish high line above 2.2 m. Path stays clear.",
       plan: "Repeat the whole length: heliconia + areca at irregular spacing, tops forming a high line; red ti mixed through; ferns, spider plants and plectranthus spilling the curb. Pothos from beam boxes.",
       mix: ["heliconia", "areca", "cordyline", "boston", "spider", "plectranthus", "pothos", "heartleaf"],
+      map: {
+        axis: "House end → entrance, RIGHT bed only · 10 m × 0.5 m",
+        stations: [
+          { n: 1, at: "Right bed, full length", plants: "Heliconia + areca at irregular spacing. Tops above 2.2 m." },
+          { n: 2, at: "Mid against the wall", plants: "Red ti mixed through, not a red stripe." },
+          { n: 3, at: "Curb", plants: "Ferns, spider plants, plectranthus spilling. Path stays clear." },
+          { n: 4, at: "Left house wall", plants: "No planting. Keep the white wall." }
+        ]
+      },
       keep: "Existing heliconia (it will regrow) and areca clumps at both ends.",
       photos: [
         { before: "zone6-1-walkway-near-end.jpg", after: "after-zone6-1-walkway-near-end.jpg", label: "Near the house" },
@@ -229,6 +282,14 @@ window.GARDEN = {
       goal: "Restrained first impression. Flowers on the left. Sign stays clear. Palm bed lusher only in the inner metre — not a flower carpet on the floor.",
       plan: "Bougainvillea left of the gate, not over the lettering. Troughs: parrot heliconia, a little ixora, plumbago. Palm corner: crotons and ti in the middle of the 1×1 m, light groundcover, not a flower explosion.",
       mix: ["bougainvillea", "croton", "cordyline", "heather", "pentas", "parrot", "plumbago"],
+      map: {
+        axis: "Left of gate → troughs → 1×1 m palm bed",
+        stations: [
+          { n: 1, at: "Left of gate", plants: "One modest pink bougainvillea. Lettering stays readable." },
+          { n: 2, at: "Grey troughs", plants: "Parrot heliconia, a little ixora, plumbago. Not overflowing." },
+          { n: 3, at: "Palm bed, inner 1×1 m", plants: "Crotons + ti in the middle. Light groundcover. No flower carpet on the paving." }
+        ]
+      },
       keep: "Christmas palm in the corner. Wooden gate and Villa Raava lettering.",
       photos: [
         { before: "zone7-2-gate-and-sign.jpg", after: "after-zone7-2-gate-and-sign.jpg", label: "Gate and sign" },
@@ -258,6 +319,15 @@ window.GARDEN = {
       goal: "Accurate privacy fence, similar height left to right, a bit lower than a roof bomb. Simple flowers at the soil. Street view stays within the planter width.",
       plan: "Keep arecas. Bamboo palms as a fence in the gaps, even-ish height. One lipstick palm accent. Heather and pentas covering soil. Light Lee Kuan Yew trail from the street, not a hedge over the wall.",
       mix: ["bambooPalm", "lipstick", "heather", "pentas"],
+      map: {
+        axis: "Balcony planter left → right, one height",
+        stations: [
+          { n: 1, at: "Planter, full length", plants: "Keep arecas. Bamboo palms in the gaps, even-ish height." },
+          { n: 2, at: "One accent", plants: "One lipstick palm, not a forest." },
+          { n: 3, at: "Soil", plants: "Heather and pentas only. No flower wall." },
+          { n: 4, at: "Street facade", plants: "Same planter only. Light Lee Kuan Yew trail, not a hedge over the wall." }
+        ]
+      },
       keep: "Existing areca clumps.",
       photos: [
         { before: "zone8-1-balcony-wide.jpg", after: "after-zone8-1-balcony-wide.jpg", label: "From the chair" },
@@ -284,6 +354,14 @@ window.GARDEN = {
       goal: "Corner: tall airy bamboo palm. Shower: three layers inside the planter only. Shower floor stays clear.",
       plan: "White pot: bamboo palm. Shower box: slim bamboo palm plus upright heliconia / bird-of-paradise paddle leaves; red ti, Dieffenbachia and bird's nest ferns; Boston ferns and peace lilies covering soil. No wide elephant ear or Monstera taking the shower.",
       mix: ["bambooPalm", "heliconia", "bop", "cordyline", "dieffenbachia", "nest", "boston", "peace"],
+      map: {
+        axis: "Corner pot + shower box. Plants stay inside each container.",
+        stations: [
+          { n: 1, at: "White corner pot", plants: "Bamboo palm. Move the thin fan palm out." },
+          { n: 2, at: "Shower box, tall", plants: "Slim bamboo palm + heliconia / bird-of-paradise paddle leaves." },
+          { n: 3, at: "Shower box, mid / low", plants: "Red ti, Dieffenbachia, bird's nest, Boston fern, peace lily. Floor stays clear." }
+        ]
+      },
       keep: "Move the thin fan palm out of the corner pot.",
       photos: [
         { before: "zone9-1-bathroom-corner-pot.jpg", after: "after-zone9-1-bathroom-corner-pot.jpg", label: "Corner pot" },
