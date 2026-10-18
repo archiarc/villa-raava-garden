@@ -1,235 +1,159 @@
 (function () {
   const G = window.GARDEN;
   const plants = G.plants;
-  const fmt = n => "Rp " + Math.round(n).toLocaleString("id-ID");
-  const plantCost = item => plants[item.plant].price * item.qty;
-  const zoneCost = z => z.buy.reduce((s, i) => s + plantCost(i), 0);
-  const totalCost = G.zones.reduce((s, z) => s + zoneCost(z), 0);
-  const plantCount = G.zones.reduce((s, z) => s + z.buy.reduce((a, i) => a + i.qty, 0), 0);
+  const fmt = n => n == null ? "RFQ" : "Rp " + Math.round(n).toLocaleString("id-ID");
+  const sum = xs => xs.reduce((a, b) => a + b, 0);
+  const unique = xs => [...new Set(xs)];
+
+  const itemRange = item => {
+    const p = plants[item.plant];
+    return {
+      min: p.priceMin == null ? null : p.priceMin * item.qty,
+      max: p.priceMax == null ? null : p.priceMax * item.qty
+    };
+  };
+  const rangeFor = list => {
+    const ranges = list.map(itemRange);
+    return {
+      min: sum(ranges.filter(r => r.min != null).map(r => r.min)),
+      max: sum(ranges.filter(r => r.max != null).map(r => r.max)),
+      unknown: list.filter(i => plants[i.plant].priceMin == null).reduce((a, i) => a + i.qty, 0)
+    };
+  };
+  const rangeText = r => `${fmt(r.min)}–${fmt(r.max)}${r.unknown ? ` + ${r.unknown} plants pending RFQ` : ""}`;
+  const allSpecs = G.zones.flatMap(z => z.buy);
+  const fixedBuy = allSpecs.filter(i => i.qty > 0);
+  const plantCount = G.zones.reduce((s, z) => s + sum(z.buy.map(i => i.qty || 0)), 0);
+  const totalRange = rangeFor(fixedBuy);
 
   const shopping = {};
-  G.zones.forEach(z => {
-    z.buy.forEach(item => {
-      if (!shopping[item.plant]) shopping[item.plant] = { plant: item.plant, qty: 0, zones: [] };
-      shopping[item.plant].qty += item.qty;
-      shopping[item.plant].zones.push("Z" + z.id);
-    });
+  G.zones.forEach(z => z.buy.filter(item => item.qty > 0).forEach(item => {
+    if (!shopping[item.plant]) shopping[item.plant] = { plant: item.plant, qty: 0, zones: [], bases: [] };
+    shopping[item.plant].qty += item.qty;
+    shopping[item.plant].zones.push(`Z${z.id}`);
+    shopping[item.plant].bases.push(item.basis);
+  }));
+  const shopList = Object.values(shopping).sort((a, b) => {
+    const ap = plants[a.plant], bp = plants[b.plant];
+    return ((bp.priceMax || 0) * b.qty) - ((ap.priceMax || 0) * a.qty);
   });
-  const shopList = Object.values(shopping).sort((a, b) => plants[b.plant].price * b.qty - plants[a.plant].price * a.qty);
 
-  const compare = (before, after, label) => `
-    <figure class="shot">
-      <div class="compare" data-compare>
-        <img src="assets/before/${before}" alt="Before ${label}">
-        <img class="after" src="assets/after/${after}" alt="After ${label}">
-        <div class="tag left">Now</div>
-        <div class="tag right">After</div>
-        <div class="handle"></div>
-        <input type="range" min="0" max="100" value="50" aria-label="Before after slider">
-      </div>
-      <figcaption>${label} · drag to compare · full frame</figcaption>
+  const sourceShot = (before, label) => `
+    <figure class="shot source-shot">
+      <img src="assets/before/${before}" alt="Source photograph: ${label}">
+      <figcaption>${label} · source-condition evidence</figcaption>
     </figure>`;
 
-  const bindCompares = (root) => {
-    root.querySelectorAll("[data-compare]").forEach(box => {
-      const input = box.querySelector("input");
-      const after = box.querySelector(".after");
-      const handle = box.querySelector(".handle");
-      const set = (v) => {
-        after.style.clipPath = `inset(0 0 0 ${v}%)`;
-        handle.style.left = v + "%";
-      };
-      set(50);
-      input.addEventListener("input", () => set(input.value));
-    });
-  };
+  const priceLabel = p => p.priceMin == null ? "Price required" : p.priceMin === p.priceMax ? fmt(p.priceMin) : `${fmt(p.priceMin)}–${fmt(p.priceMax)}`;
+  const statusClass = p => p.priceMin == null ? "risk" : p.priceStatus.includes("quoted") ? "ok" : "warn";
 
-  const buyRows = (list) => list.map(item => {
-    const p = plants[item.plant];
-    return `<div class="buy-row">
+  const buyRows = list => list.map(item => {
+    const p = plants[item.plant], r = itemRange(item), formulaOnly = !item.qty;
+    return `<div class="buy-row procurement-row">
       <img src="assets/plants/${p.photo}" alt="${p.name}">
       <div>
-        <b>${item.qty} × ${p.name}</b>
-        <div class="small">${p.latin} · ${p.idn}<br>${item.why}</div>
+        <b>${formulaOnly ? "Measure ×" : `${item.qty} ×`} ${p.name}</b>
+        <div class="small"><i>${p.latin}</i> · ${p.idn}</div>
+        <div class="detail-line"><b>${item.station}</b> · ${item.basis}</div>
+        ${formulaOnly ? `<div class="formula">${item.formula}</div>` : ""}
+        <div class="small">Supply: ${p.supplySpec}<br>Availability: ${p.availability}</div>
       </div>
-      <div class="price">${fmt(plantCost(item))}</div>
+      <div class="price">${formulaOnly ? `<span class="status risk">Not released</span>Measure first` : `<span class="status ${statusClass(p)}">${p.priceStatus}</span>${r.min == null ? "RFQ" : r.min === r.max ? fmt(r.min) : `${fmt(r.min)}–${fmt(r.max)}`}`}</div>
     </div>`;
   }).join("");
 
-  const mixChips = (z) => (z.mix || []).map(id => {
+  const mixChips = z => (z.mix || []).map(id => {
     const p = plants[id];
-    if (!p) return "";
-    return `<span class="mix-chip"><img src="assets/plants/${p.photo}" alt="">${p.name}</span>`;
+    return p ? `<span class="mix-chip"><img src="assets/plants/${p.photo}" alt="">${p.name}</span>` : "";
   }).join("");
 
-  const wallMap = (z) => {
-    if (!z.map || !z.map.stations) return "";
-    return `<ol class="wall-map">
-      <p class="wall-axis">${z.map.axis}</p>
-      ${z.map.stations.map(s => `<li><b>${s.n}</b><div><span>${s.at}</span><p>${s.plants}</p></div></li>`).join("")}
-    </ol>`;
-  };
+  const wallMap = z => `<ol class="wall-map">
+    <p class="wall-axis">${z.map.axis}</p>
+    ${z.map.stations.map(s => `<li><b>${s.n}</b><div><span>${s.at}</span><p>${s.plants}</p></div></li>`).join("")}
+  </ol>`;
 
-  const zoneCard = (z) => `
-    <article class="card" data-open-zone="${z.id}">
-      <div class="zone-hero"><img src="assets/after/${z.photos[0].after}" alt="${z.name}"></div>
+  const zoneCard = z => {
+    const fixed = z.buy.filter(i => i.qty > 0), count = sum(fixed.map(i => i.qty)), r = rangeFor(fixed), formulaOnly = z.buy.some(i => !i.qty);
+    return `<article class="card" data-open-zone="${z.id}" tabindex="0" role="button" aria-label="Open Zone ${z.id}: ${z.name}">
+      <div class="zone-hero"><img src="assets/before/${z.photos[0].before}" alt="${z.name} source condition"></div>
       <div class="body">
-        <h3>${z.id}. ${z.name}</h3>
-        <div class="meta">${z.wall || z.size} · ${z.light}</div>
-        <div class="chip-row">
-          <span class="chip">${z.photos.length} views of this wall</span>
-          <span class="chip">${z.buy.reduce((s,i)=>s+i.qty,0)} plants</span>
-          <span class="chip">${fmt(zoneCost(z))}</span>
-        </div>
+        <div class="kicker">Zone ${z.id}</div><h3>${z.name}</h3>
+        <div class="meta">${z.size} · ${z.light}</div>
+        <div class="chip-row"><span class="chip">${formulaOnly && !count ? "Measure-to-release" : `${count} to order`}</span><span class="chip">${formulaOnly && !count ? "No fixed budget" : rangeText(r)}</span></div>
         <p class="small">${z.goal}</p>
       </div>
     </article>`;
+  };
 
-  const zonePage = (z) => {
-    const hero = z.photos[0];
-    const rest = z.photos.slice(1);
+  const zonePage = z => {
+    const fixed = z.buy.filter(i => i.qty > 0), count = sum(fixed.map(i => i.qty)), r = rangeFor(fixed), formulaOnly = z.buy.some(i => !i.qty);
     return `<a class="back" href="#zones">← All zones</a>
       <article class="zone-page">
         <header class="zone-head">
-          <div class="kicker">Wall ${z.id} of 9</div>
-          <h2>${z.id}. ${z.name}</h2>
-          <p>${z.goal}</p>
-          <div class="chip-row">
-            <span class="chip">${z.size}</span>
-            <span class="chip">${z.light}</span>
-            <span class="chip">${z.water}</span>
-            <span class="chip">Seen from: ${z.seen}</span>
-          </div>
+          <div class="kicker">Zone ${z.id} of 9</div><h2>${z.name}</h2><p>${z.goal}</p>
+          <div class="chip-row"><span class="chip">${z.size}</span><span class="chip">${z.light}</span><span class="chip">${z.water}</span><span class="chip">Seen from: ${z.seen}</span>${formulaOnly ? '<span class="chip status risk">Measure-to-release · no fixed order</span>' : ''}</div>
         </header>
-
         <section class="plan-card">
-          <div class="kicker">Planting map for this wall</div>
-          <p class="wall-line">${z.wall || z.size}</p>
-          <p>${z.plan || z.goal}</p>
-          ${wallMap(z)}
-          <dl class="layers">
-            <dt>Tall</dt><dd>${z.layers.tall}</dd>
-            <dt>Middle</dt><dd>${z.layers.mid}</dd>
-            <dt>Low</dt><dd>${z.layers.low}</dd>
-            <dt>Keep</dt><dd>${z.keep}</dd>
-          </dl>
+          <div class="kicker">Authoritative planting map</div>
+          <p class="wall-line">${z.wall}</p><p>${z.plan}</p>${wallMap(z)}
+          <div class="confidence"><b>Evidence confidence</b><br>${z.confidence}</div>
+          <dl class="layers"><dt>Tall order</dt><dd>${z.layers.tall}</dd><dt>Middle order</dt><dd>${z.layers.mid}</dd><dt>Low order</dt><dd>${z.layers.low}</dd><dt>Retain / reuse</dt><dd>${z.keep}</dd></dl>
           <div class="mix-row">${mixChips(z)}</div>
         </section>
-
-        <section class="shots">
-          ${compare(hero.before, hero.after, hero.label)}
-          ${rest.map(p => compare(p.before, p.after, p.label)).join("")}
-        </section>
-
-        <section class="buy-card">
-          <h3>Order for this wall · ${fmt(zoneCost(z))}</h3>
-          <p class="small">Same mix in every photo of this zone. Confirm sizes at the nursery.</p>
-          ${buyRows(z.buy)}
-        </section>
+        <section class="control-card"><h3>Before the contractor orders</h3><ul>${z.holdPoints.map(x => `<li>${x}</li>`).join("")}</ul><h3>Maintenance intent</h3><p>${z.maintenance}</p></section>
+        <section class="buy-card"><h3>${formulaOnly && !count ? "Measure-to-release schedule" : `Zone order · ${count} plants`}</h3><p class="small">${formulaOnly && !count ? "No purchase quantity or budget is released until the listed field measurements are returned." : `Plant-only allowance: ${rangeText(r)}. Existing retained plants are excluded. Supplied grade must match each row.`}</p>${buyRows(z.buy)}</section>
+        <section class="shots"><div class="visual-note"><b>Source-condition evidence only.</b> The previous AI after-shots failed procurement-grade botanical and cross-angle QA and are intentionally not shown. The station map and schedule above control.</div>${z.photos.map(p=>sourceShot(p.before,p.label)).join("")}</section>
       </article>`;
   };
 
   const home = () => `
-    <p class="lede">Each zone is one wall. Open it for the planting map, then every photo of that wall at full width.</p>
+    <section class="release-card"><div class="kicker">Procurement control</div><h2>${G.procurement.status}</h2><p>${G.procurement.designLanguage}</p><div class="facts"><div><b>Authority</b><span>${G.procurement.authority}</span></div><div><b>Quantity method</b><span>${G.procurement.calculationRule}</span></div><div><b>Approval boundary</b><span>${G.procurement.approval}</span></div></div></section>
+    <p class="lede">Open a zone for its physical station map, evidence confidence, hold points, maintenance intent and traceable order rows.</p>
     <div class="grid zone-grid">${G.zones.map(zoneCard).join("")}</div>`;
 
-  const plantsPage = () => `
-    <p class="lede">Every plant used in the plan, with a photo. Quoted prices from TNT Household ServiceZ. Estimates are typical Bali nursery range — confirm before buying.</p>
-    <div class="grid plant-grid">${Object.values(plants).map(p => `
-      <article class="plant-card">
-        <img src="assets/plants/${p.photo}" alt="${p.name}">
-        <div class="body">
-          <h3>${p.name}</h3>
-          <div class="small">${p.latin}<br>${p.idn} · ${p.layer} · ${p.light}${p.flowers ? " · flowers" : ""}</div>
-          <div class="price">${fmt(p.price)} <span class="small">${p.source}</span></div>
-        </div>
-      </article>`).join("")}</div>`;
-
-  const shopPage = () => `
-    <div class="totals">
-      <div class="kicker">One shopping list</div>
-      <h2>${fmt(totalCost)}</h2>
-      <p class="small">${plantCount} plants across 9 walls. Soil, compost, planters, bin enclosure and labour not included.</p>
-    </div>
-    <div class="note">${G.note}</div>
-    <table>
-      <thead><tr><th></th><th>Plant</th><th>Qty</th><th>Each</th><th>Total</th></tr></thead>
-      <tbody>
-        ${shopList.map(item => {
-          const p = plants[item.plant];
-          return `<tr>
-            <td><img src="assets/plants/${p.photo}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:8px"></td>
-            <td><b>${p.name}</b><div class="small">${p.latin}<br>Walls ${[...new Set(item.zones)].join(", ")}</div></td>
-            <td>${item.qty}</td>
-            <td>${fmt(p.price)}</td>
-            <td class="price">${fmt(p.price * item.qty)}</td>
-          </tr>`;
-        }).join("")}
-      </tbody>
-    </table>`;
-
-  const stats = document.getElementById("stats");
-  stats.innerHTML = `
-    <div class="stat"><b>9</b><span>walls</span></div>
-    <div class="stat"><b>${plantCount}</b><span>plants to buy</span></div>
-    <div class="stat"><b>${fmt(totalCost)}</b><span>plants only</span></div>`;
-
-  const nav = document.getElementById("nav");
-  const tabs = [
-    ["zones", "Zones"],
-    ["plants", "Plant photos"],
-    ["shop", "Buy list"]
-  ];
-  nav.innerHTML = tabs.map(([id, label]) => `<button data-tab="${id}">${label}</button>`).join("");
-
-  const app = document.getElementById("app");
-  let currentTab = "zones";
-  let currentZone = null;
-
-  const render = () => {
-    nav.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.tab === currentTab && !currentZone));
-    if (currentTab === "plants") app.innerHTML = plantsPage();
-    else if (currentTab === "shop") app.innerHTML = shopPage();
-    else if (currentZone) {
-      const z = G.zones.find(x => x.id === currentZone);
-      app.innerHTML = zonePage(z);
-      bindCompares(app);
-    } else {
-      app.innerHTML = home();
-      app.querySelectorAll("[data-open-zone]").forEach(card => {
-        card.addEventListener("click", () => {
-          currentZone = Number(card.dataset.openZone);
-          location.hash = "zone-" + currentZone;
-          render();
-          window.scrollTo(0, 0);
-        });
-      });
-    }
+  const plantsPage = () => {
+    const used = unique(allSpecs.map(x => x.plant));
+    return `<section class="release-card"><div class="kicker">Plant evidence</div><h2>${used.length} specified supply grades</h2><p>Photos identify the intended plant, not the delivered grade. The nursery must quote and supply the botanical name, stated size and habit shown in each specification.</p></section>
+    <div class="grid plant-grid">${used.map(id => {
+      const p=plants[id];
+      return `<article class="plant-card"><img src="assets/plants/${p.photo}" alt="${p.name}"><div class="body"><h3>${p.name}</h3><div class="small"><i>${p.latin}</i><br>${p.idn} · ${p.layer} · ${p.light}</div><p class="small"><b>Supply:</b> ${p.supplySpec}<br><b>Spacing:</b> ${p.spacing}<br><b>Mature:</b> ${p.mature}<br><b>Availability:</b> ${p.availability}</p><div class="price">${priceLabel(p)} <span class="status ${statusClass(p)}">${p.priceStatus}</span></div></div></article>`;
+    }).join("")}</div>`;
   };
 
-  nav.addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (!b) return;
-    currentTab = b.dataset.tab;
-    currentZone = null;
-    location.hash = currentTab;
-    render();
-  });
+  const shopPage = () => `
+    <section class="totals"><div class="kicker">Consolidated procurement schedule</div><h2>${plantCount} plants</h2><p class="budget">${rangeText(totalRange)}</p><p class="small">Fixed plant-only allowance for Zones 1–7 and 9. Zone 8 is excluded until measured. Unknown-price supplier items are excluded from the rupiah range until quoted.</p><div class="download-row"><a class="download" href="procurement.csv" download>Download CSV</a><a class="download secondary" href="INSTALLATION-SPEC.md" download>Installation specification</a></div></section>
+    <div class="note">${G.note}</div>
+    <p class="table-cue" id="procurement-scroll-hint">Swipe table sideways to compare every column →</p>
+    <div class="table-wrap" role="region" tabindex="0" aria-label="Consolidated procurement schedule" aria-describedby="procurement-scroll-hint"><table><thead><tr><th>Plant</th><th>Qty</th><th>Zones</th><th>Supply / spacing</th><th>Unit allowance</th><th>Total allowance</th></tr></thead><tbody>
+      ${shopList.map(item => { const p=plants[item.plant], r=itemRange(item); return `<tr><td><b>${p.name}</b><div class="small"><i>${p.latin}</i><br>${p.availability}</div></td><td>${item.qty}</td><td>${unique(item.zones).join(", ")}</td><td><div class="small">${p.supplySpec}<br>${p.spacing}</div></td><td>${priceLabel(p)}<br><span class="status ${statusClass(p)}">${p.priceStatus}</span></td><td class="price">${r.min==null?"RFQ":r.min===r.max?fmt(r.min):`${fmt(r.min)}–${fmt(r.max)}`}</td></tr>`; }).join("")}
+    </tbody></table></div>
+    <section class="control-card"><div class="kicker">Zone 8 · not released</div><h3>Field-measure formulas</h3>${buyRows(G.zones.find(z=>z.id===8).buy)}</section>
+    <section class="control-card"><h3>RFQ award rules</h3><ol><li>Nursery returns botanical name, current stock, supplied height/spread, pot/polybag size, unit price and a current batch photo for every row.</li><li>Contractor verifies every zone hold point and field dimension before award; any changed quantity must retain the spacing formula and map station.</li><li>No substitutions without written approval. Proposed alternatives must match light, water, mature size, habit and design role.</li><li>Reject root-bound, pest-damaged, sun-scorched, unstable or mislabelled stock. Existing retained plants are not reordered.</li></ol></section>`;
 
-  window.addEventListener("hashchange", () => {
-    const h = location.hash.replace("#", "");
-    if (h.startsWith("zone-")) {
-      currentTab = "zones";
-      currentZone = Number(h.split("-")[1]);
-    } else if (["zones", "plants", "shop"].includes(h)) {
-      currentTab = h;
-      currentZone = null;
-    }
-    render();
-  });
+  const stats = document.getElementById("stats");
+  stats.innerHTML = `<div class="stat"><b>9</b><span>physical zones</span></div><div class="stat"><b>${plantCount}</b><span>fixed plants</span></div><div class="stat"><b>${usedTaxa()}</b><span>plant taxa</span></div>`;
+  function usedTaxa(){ return unique(allSpecs.map(x=>plants[x.plant].latin)).length; }
 
-  const start = location.hash.replace("#", "");
-  if (start.startsWith("zone-")) currentZone = Number(start.split("-")[1]);
-  else if (["plants", "shop"].includes(start)) currentTab = start;
+  const nav = document.getElementById("nav");
+  const tabs = [["zones","Zone maps"],["plants","Plant evidence"],["shop","Procurement"]];
+  nav.innerHTML = tabs.map(([id,label])=>`<button data-tab="${id}">${label}</button>`).join("");
+  const app = document.getElementById("app");
+  let currentTab="zones", currentZone=null;
+
+  const openCards = () => app.querySelectorAll("[data-open-zone]").forEach(card => {
+    const open=()=>{ currentZone=Number(card.dataset.openZone); location.hash="zone-"+currentZone; render(); window.scrollTo(0,0); };
+    card.addEventListener("click",open);
+    card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
+  });
+  const render = () => {
+    nav.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.tab===currentTab&&!currentZone));
+    if(currentTab==="plants") app.innerHTML=plantsPage();
+    else if(currentTab==="shop") app.innerHTML=shopPage();
+    else if(currentZone){ const z=G.zones.find(x=>x.id===currentZone); app.innerHTML=zonePage(z); }
+    else { app.innerHTML=home(); openCards(); }
+  };
+  nav.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;currentTab=b.dataset.tab;currentZone=null;location.hash=currentTab;render();});
+  window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h.startsWith("zone-")){currentTab="zones";currentZone=Number(h.split("-")[1]);}else if(["zones","plants","shop"].includes(h)){currentTab=h;currentZone=null;}render();});
+  const start=location.hash.slice(1);if(start.startsWith("zone-"))currentZone=Number(start.split("-")[1]);else if(["plants","shop"].includes(start))currentTab=start;
   render();
 })();
