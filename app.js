@@ -17,21 +17,18 @@
   });
   const shopList = Object.values(shopping).sort((a, b) => plants[b.plant].price * b.qty - plants[a.plant].price * a.qty);
 
-  const el = (html) => {
-    const t = document.createElement("template");
-    t.innerHTML = html.trim();
-    return t.content.firstElementChild;
-  };
-
   const compare = (before, after, label) => `
-    <div class="compare" data-compare>
-      <img src="assets/before/${before}" alt="Before ${label}">
-      <img class="after" src="assets/after/${after}" alt="After ${label}">
-      <div class="tag left">Now</div>
-      <div class="tag right">After</div>
-      <div class="handle"></div>
-      <input type="range" min="0" max="100" value="50" aria-label="Before after slider">
-    </div>`;
+    <figure class="shot">
+      <div class="compare" data-compare>
+        <img src="assets/before/${before}" alt="Before ${label}">
+        <img class="after" src="assets/after/${after}" alt="After ${label}">
+        <div class="tag left">Now</div>
+        <div class="tag right">After</div>
+        <div class="handle"></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Before after slider">
+      </div>
+      <figcaption>${label} · drag to compare · full frame</figcaption>
+    </figure>`;
 
   const bindCompares = (root) => {
     root.querySelectorAll("[data-compare]").forEach(box => {
@@ -59,14 +56,20 @@
     </div>`;
   }).join("");
 
+  const mixChips = (z) => (z.mix || []).map(id => {
+    const p = plants[id];
+    if (!p) return "";
+    return `<span class="mix-chip"><img src="assets/plants/${p.photo}" alt="">${p.name}</span>`;
+  }).join("");
+
   const zoneCard = (z) => `
     <article class="card" data-open-zone="${z.id}">
       <div class="zone-hero"><img src="assets/after/${z.photos[0].after}" alt="${z.name}"></div>
       <div class="body">
         <h3>${z.id}. ${z.name}</h3>
-        <div class="meta">${z.size} · ${z.light}</div>
+        <div class="meta">${z.wall || z.size} · ${z.light}</div>
         <div class="chip-row">
-          <span class="chip">${z.photos.length} views</span>
+          <span class="chip">${z.photos.length} views of this wall</span>
           <span class="chip">${z.buy.reduce((s,i)=>s+i.qty,0)} plants</span>
           <span class="chip">${fmt(zoneCost(z))}</span>
         </div>
@@ -75,12 +78,12 @@
     </article>`;
 
   const zonePage = (z) => {
-    const first = z.photos[0];
+    const hero = z.photos[0];
+    const rest = z.photos.slice(1);
     return `<a class="back" href="#zones">← All zones</a>
-      <article class="card">
-        ${compare(first.before, first.after, first.label)}
-        <div class="photo-nav">${z.photos.map((p,i)=>`<button data-photo="${i}" class="${i===0?"active":""}">${p.label}</button>`).join("")}</div>
-        <div class="body">
+      <article class="zone-page">
+        <header class="zone-head">
+          <div class="kicker">Wall ${z.id} of 9</div>
           <h2>${z.id}. ${z.name}</h2>
           <p>${z.goal}</p>
           <div class="chip-row">
@@ -89,19 +92,36 @@
             <span class="chip">${z.water}</span>
             <span class="chip">Seen from: ${z.seen}</span>
           </div>
+        </header>
+
+        <section class="plan-card">
+          <div class="kicker">Planting map for this wall</div>
+          <p class="wall-line">${z.wall || z.size}</p>
+          <p>${z.plan || z.goal}</p>
           <dl class="layers">
             <dt>Tall</dt><dd>${z.layers.tall}</dd>
             <dt>Middle</dt><dd>${z.layers.mid}</dd>
             <dt>Low</dt><dd>${z.layers.low}</dd>
             <dt>Keep</dt><dd>${z.keep}</dd>
           </dl>
-          <h3>Buy for this zone · ${fmt(zoneCost(z))}</h3>
+          <div class="mix-row">${mixChips(z)}</div>
+        </section>
+
+        <section class="shots">
+          ${compare(hero.before, hero.after, hero.label)}
+          ${rest.map(p => compare(p.before, p.after, p.label)).join("")}
+        </section>
+
+        <section class="buy-card">
+          <h3>Order for this wall · ${fmt(zoneCost(z))}</h3>
+          <p class="small">Same mix in every photo of this zone. Confirm sizes at the nursery.</p>
           ${buyRows(z.buy)}
-        </div>
+        </section>
       </article>`;
   };
 
   const home = () => `
+    <p class="lede">Each zone is one wall. Open it for the planting map, then every photo of that wall at full width.</p>
     <div class="grid zone-grid">${G.zones.map(zoneCard).join("")}</div>`;
 
   const plantsPage = () => `
@@ -120,7 +140,7 @@
     <div class="totals">
       <div class="kicker">One shopping list</div>
       <h2>${fmt(totalCost)}</h2>
-      <p class="small">${plantCount} plants across 9 zones. Soil, compost, planters, bin enclosure, wall bars and labour not included.</p>
+      <p class="small">${plantCount} plants across 9 walls. Soil, compost, planters, bin enclosure and labour not included.</p>
     </div>
     <div class="note">${G.note}</div>
     <table>
@@ -130,7 +150,7 @@
           const p = plants[item.plant];
           return `<tr>
             <td><img src="assets/plants/${p.photo}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:8px"></td>
-            <td><b>${p.name}</b><div class="small">${p.latin}<br>Zones ${[...new Set(item.zones)].join(", ")}</div></td>
+            <td><b>${p.name}</b><div class="small">${p.latin}<br>Walls ${[...new Set(item.zones)].join(", ")}</div></td>
             <td>${item.qty}</td>
             <td>${fmt(p.price)}</td>
             <td class="price">${fmt(p.price * item.qty)}</td>
@@ -141,7 +161,7 @@
 
   const stats = document.getElementById("stats");
   stats.innerHTML = `
-    <div class="stat"><b>9</b><span>zones</span></div>
+    <div class="stat"><b>9</b><span>walls</span></div>
     <div class="stat"><b>${plantCount}</b><span>plants to buy</span></div>
     <div class="stat"><b>${fmt(totalCost)}</b><span>plants only</span></div>`;
 
@@ -165,16 +185,6 @@
       const z = G.zones.find(x => x.id === currentZone);
       app.innerHTML = zonePage(z);
       bindCompares(app);
-      app.querySelectorAll("[data-photo]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const p = z.photos[Number(btn.dataset.photo)];
-          const box = app.querySelector("[data-compare]");
-          box.querySelector("img").src = "assets/before/" + p.before;
-          box.querySelector(".after").src = "assets/after/" + p.after;
-          app.querySelectorAll("[data-photo]").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-        });
-      });
     } else {
       app.innerHTML = home();
       app.querySelectorAll("[data-open-zone]").forEach(card => {

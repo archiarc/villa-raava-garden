@@ -193,19 +193,36 @@ th { color: var(--muted); font-weight: 600; }
   padding: 10px 12px;
   font-size: 13px;
 }
-.zone-hero img { width: 100%; height: auto; max-height: 420px; object-fit: cover; object-position: center top; }
+.zone-hero img { width: 100%; height: auto; max-height: 280px; object-fit: cover; object-position: center top; }
 .back {
   display: inline-block;
   margin-bottom: 10px;
   color: var(--muted);
 }
-.photo-nav { display: flex; gap: 6px; overflow: auto; padding: 8px 0; }
-.photo-nav button {
+.zone-page { display: grid; gap: 16px; }
+.zone-head h2 { margin: 4px 0 8px; }
+.plan-card, .buy-card {
+  background: var(--card);
   border: 1px solid var(--line);
-  background: #203228;
-  color: var(--ink);
-  border-radius: 10px;
-  padding: 6px 10px;
-  white-space: nowrap;
+  border-radius: 20px;
+  padding: 16px;
 }
-.photo-nav button.active { background: var(--accent); color: #1a1404; }
+.wall-line { color: var(--accent); font-weight: 600; margin: 6px 0 8px; }
+.shots { display: grid; gap: 18px; }
+.shot { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.shot figcaption {
+  padding: 10px 14px 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.mix-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.mix-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #24362c;
+  border-radius: 999px;
+  padding: 4px 10px 4px 4px;
+  font-size: 12px;
+}
+.mix-chip img { width: 28px; height: 28px; object-fit: cover; border-radius: 50%; }
