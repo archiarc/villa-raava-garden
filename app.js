@@ -95,7 +95,6 @@
             <dt>Low</dt><dd>${z.layers.low}</dd>
             <dt>Keep</dt><dd>${z.keep}</dd>
           </dl>
-          ${z.drawing ? `<p class="small">Plan drawing</p><img src="assets/drawings/${z.drawing}" alt="Plan drawing for ${z.name}">` : ""}
           <h3>Buy for this zone · ${fmt(zoneCost(z))}</h3>
           ${buyRows(z.buy)}
         </div>

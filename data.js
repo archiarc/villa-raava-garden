@@ -53,7 +53,6 @@ window.GARDEN = {
       light: "Shade at ground, sun on tops", water: "Roofed overhang — drip only",
       goal: "Fill the whole window with upright tropical height. Screen the heater and AC, keep them reachable.",
       keep: "Existing areca clump at the far end.",
-      drawing: "zone1-plan-drawing.jpg",
       photos: [
         { before: "zone1-1-bedroom-view.jpg", after: "after-zone1-1-bedroom-view.jpg", label: "From the bed" },
         { before: "zone1-2-alley-from-door.jpg", after: "after-zone1-2-alley-from-door.jpg", label: "From the door" }
@@ -77,29 +76,27 @@ window.GARDEN = {
       id: 2, name: "Bedroom indoor balcony", size: "3.5–4 m × 1 m",
       seen: "Bedroom glass wall and the shower",
       light: "Bright filtered, no direct sun", water: "Transparent roof — no rain, humid from shower",
-      goal: "Showpiece jungle from floor to breeze blocks. Mosquito-safe: no saucers, no water-holding plants, no pebbles.",
+      goal: "Lush mixed jungle behind the glass only. Hide the white wall with plants, not a green wall covering. Pink mixed along the whole length, not one block.",
       keep: "Existing areca, two Chamaedorea palms, snake plants.",
-      drawing: "zone2-plan-drawing.jpg",
       photos: [
         { before: "zone2-1-bedroom-glass-wall.jpg", after: "after-zone2-1-bedroom-glass-wall.jpg", label: "From the bedroom" },
         { before: "zone2-2-from-shower.jpg", after: "after-zone2-2-from-shower.jpg", label: "From the shower" }
       ],
       layers: {
-        tall: "2 m elephant ear on the desk side, slim bamboo palm, existing areca, two Chamaedorea at the shower end.",
-        mid: "Monstera, split-leaf philodendron, two Dieffenbachia, existing snake plants.",
-        low: "Stromanthe, pink Aglaonema, peace lilies, Boston ferns and spider plants along the glass."
+        tall: "Alocasia on the desk side, bamboo palm, existing areca, Chamaedorea at the shower end — irregular heights.",
+        mid: "Dieffenbachia mixed through the whole run, not in a block.",
+        low: "Stromanthe and pink Aglaonema in small groups along the full glass line, mixed with ferns, spider plants and pothos."
       },
       buy: [
         { plant: "alocasia", qty: 1, why: "Huge leaves on the empty desk side" },
         { plant: "bambooPalm", qty: 1, why: "Fills the white band to the breeze blocks" },
-        { plant: "selloum", qty: 1, why: "Wide cut leaves in the middle" },
-        { plant: "monstera", qty: 1, why: "Big split leaves at 1–2 m" },
-        { plant: "dieffenbachia", qty: 2, why: "Pale patterned leaves either side" },
-        { plant: "stromanthe", qty: 2, why: "Pink and cream near the glass" },
-        { plant: "aglaonema", qty: 3, why: "More pink at the front" },
+        { plant: "dieffenbachia", qty: 3, why: "Pale leaves mixed through the run" },
+        { plant: "stromanthe", qty: 4, why: "Pink repeated along the full glass line" },
+        { plant: "aglaonema", qty: 4, why: "Pink mixed, not one block" },
         { plant: "peace", qty: 3, why: "White flowers in this light" },
         { plant: "boston", qty: 6, why: "Feathery carpet, no soil" },
-        { plant: "spider", qty: 4, why: "Striped spill along the glass" }
+        { plant: "spider", qty: 4, why: "Striped spill along the glass" },
+        { plant: "pothos", qty: 6, why: "Mix through the low layer" }
       ]
     },
     {
@@ -162,23 +159,22 @@ window.GARDEN = {
       id: 5, name: "Dining terrace", size: "10 m × 3–4 m",
       seen: "Dining table and the path past it",
       light: "Bright, dappled through branches", water: "Glass roof — no rain",
-      goal: "Make people want to sit here. Packed troughs, climbers to the breeze blocks, a green stretch wall, hanging plants.",
-      keep: "Existing bird of paradise, rubber plant, Monstera and pothos already in the troughs — bulk them up.",
+      goal: "A longer sitting terrace. Plants packed against the left wall. Art and a mirror on the back wall — no gym ladder.",
+      keep: "Existing bird of paradise, rubber plant, Monstera and pothos in the troughs — bulk them up.",
       photos: [
         { before: "zone5-1-dining-terrace.jpg", after: "after-zone5-1-dining-terrace.jpg", label: "Whole terrace" }
       ],
       layers: {
-        tall: "One extra tall bird of paradise at the back wall. Climbers to the breeze blocks.",
-        mid: "Packed troughs: bird of paradise, Monstera, rubber plant, pothos.",
-        low: "Spider plants spilling over trough edges. Trailing hanging planters from the pergola."
+        tall: "Bird of paradise and rubber plant in the left troughs, reaching up the wall.",
+        mid: "Monstera and mixed foliage packed against the left wall. Art plus a round rattan mirror on the back wall.",
+        low: "Spider plants and pothos spilling over trough edges. Hanging planters from the pergola."
       },
       buy: [
-        { plant: "bop", qty: 3, why: "Orange flowers in the troughs and back wall" },
-        { plant: "monstera", qty: 2, why: "Big leaves to fill the wall above 1.8 m" },
-        { plant: "pothos", qty: 10, why: "Spill over troughs and hang" },
+        { plant: "bop", qty: 3, why: "Orange flowers packed against the left wall" },
+        { plant: "monstera", qty: 2, why: "Big leaves in the troughs" },
+        { plant: "pothos", qty: 8, why: "Spill and hanging baskets" },
         { plant: "spider", qty: 8, why: "Striped cascade over the trough lip" },
-        { plant: "heartleaf", qty: 6, why: "Climbs the wall bars" },
-        { plant: "bluesky", qty: 4, why: "Blue flowers on wires up the left wall" }
+        { plant: "heartleaf", qty: 4, why: "Hanging from the pergola" }
       ]
     },
     {
@@ -211,7 +207,7 @@ window.GARDEN = {
       id: 7, name: "Street frontage", size: "Corner 1 × 1 m + 2 grey troughs",
       seen: "The street and arriving guests",
       light: "Full sun, reflected heat, dust", water: "Open sky — rain in wet season",
-      goal: "First impression: flowering, welcoming, one statement bougainvillea. Sign stays fully visible. Hide the bins.",
+      goal: "Restrained first impression. Flowers on the left. Sign stays clear. Palm corner a bit lusher in the middle — not a flower explosion.",
       keep: "Christmas palm in the corner. Wooden gate and Villa Raava lettering.",
       photos: [
         { before: "zone7-2-gate-and-sign.jpg", after: "after-zone7-2-gate-and-sign.jpg", label: "Gate and sign" },
@@ -219,26 +215,25 @@ window.GARDEN = {
         { before: "zone7-3-grey-troughs.jpg", after: "after-zone7-3-grey-troughs.jpg", label: "Grey troughs" }
       ],
       layers: {
-        tall: "One large pink bougainvillea trained on the wall. Existing Christmas palm.",
-        mid: "Ixora, crotons and red ti around the palm. Parrot heliconia in the troughs.",
-        low: "Mexican heather and pentas covering soil. Plumbago spilling from the troughs."
+        tall: "One modest pink bougainvillea left of the gate. Existing Christmas palm.",
+        mid: "A few crotons and red ti around the palm, not a flower wall.",
+        low: "Light groundcover in the palm bed. Simple mix in the grey troughs."
       },
       buy: [
-        { plant: "bougainvillea", qty: 1, why: "The one statement plant by the sign" },
-        { plant: "ixora", qty: 10, why: "Year-round red flowers in sun" },
-        { plant: "croton", qty: 6, why: "Colour around the palm" },
-        { plant: "cordyline", qty: 4, why: "Upright red accents" },
-        { plant: "heather", qty: 12, why: "Tiny purple carpet" },
-        { plant: "pentas", qty: 12, why: "Star flowers in the corner and troughs" },
-        { plant: "parrot", qty: 4, why: "Back of the grey troughs" },
-        { plant: "plumbago", qty: 6, why: "Sky-blue spill over the trough fronts" }
+        { plant: "bougainvillea", qty: 1, why: "Modest flowering plant left of the gate" },
+        { plant: "croton", qty: 4, why: "Colour in the middle of the palm bed" },
+        { plant: "cordyline", qty: 3, why: "Upright red around the palm" },
+        { plant: "heather", qty: 8, why: "Simple soil cover" },
+        { plant: "pentas", qty: 6, why: "A few star flowers, not a mass" },
+        { plant: "parrot", qty: 2, why: "Back of the grey troughs" },
+        { plant: "plumbago", qty: 3, why: "A little spill over the trough fronts" }
       ]
     },
     {
       id: 8, name: "Balcony planter", size: "Long planter ~0.8–1 m wide",
       seen: "Balcony chair, the street, neighbours opposite",
       light: "Full sun, strong afternoon", water: "Roofed — only rain blown in",
-      goal: "Privacy wall plus a green curtain down the facade. No gaps between palm trunks. No soil from the chair.",
+      goal: "A real privacy fence of bamboo palms between the arecas. One lipstick palm as an accent. Simple flowers at the soil. Do not overdo it.",
       keep: "Existing areca clumps.",
       photos: [
         { before: "zone8-1-balcony-wide.jpg", after: "after-zone8-1-balcony-wide.jpg", label: "From the chair" },
@@ -246,41 +241,41 @@ window.GARDEN = {
         { before: "zone7-4-facade-upper-planter.jpg", after: "after-zone7-4-facade-upper-planter.jpg", label: "From the street" }
       ],
       layers: {
-        tall: "Keep arecas.",
-        mid: "Orange jasmine and red hibiscus filling every gap, leafy from the base, 1.5–2.5 m.",
-        low: "Mexican heather and pentas. Continuous Lee Kuan Yew along the outer edge, cascading 1.5–2 m."
+        tall: "Keep arecas. Add bamboo palms as a fence in the gaps. One lipstick palm as an accent.",
+        mid: "The bamboo palm foliage is the privacy screen.",
+        low: "Mexican heather and pentas covering soil only."
       },
       buy: [
-        { plant: "murraya", qty: 8, why: "Dense fragrant privacy hedge" },
-        { plant: "hibiscus", qty: 6, why: "Daily red flowers and solid leaf cover" },
-        { plant: "lky", qty: 20, why: "Green curtain down the white facade" },
-        { plant: "heather", qty: 15, why: "Soil cover when you look down" },
-        { plant: "pentas", qty: 12, why: "Flowers in the low layer" }
+        { plant: "bambooPalm", qty: 6, why: "Privacy fence between the areca trunks" },
+        { plant: "lipstick", qty: 1, why: "One red-stem accent, not a forest" },
+        { plant: "heather", qty: 10, why: "Simple soil cover" },
+        { plant: "pentas", qty: 8, why: "A few flowers at the base" }
       ]
     },
     {
       id: 9, name: "Upstairs bathroom", size: "Corner pot + shower planter",
       seen: "Bathroom and open-air shower",
       light: "Bright top light", water: "Roofed — never rained on, shower splash",
-      goal: "Tall airy corner plant. Tropical shower with ferns, big leaves and a slim palm. Nothing spiky. Niche stays visible.",
+      goal: "Corner: tall airy bamboo palm. Shower: three layers inside the planter only — upright banana-like leaves, denser mid foliage, low ferns. Shower floor stays clear.",
       keep: "Move the thin fan palm out of the corner pot.",
       photos: [
         { before: "zone9-1-bathroom-corner-pot.jpg", after: "after-zone9-1-bathroom-corner-pot.jpg", label: "Corner pot" },
         { before: "zone9-2-open-shower-planter.jpg", after: "after-zone9-2-open-shower-planter.jpg", label: "Open-air shower" }
       ],
       layers: {
-        tall: "2 m bamboo palm in the white corner pot. Slim lady palm reaching the glass roof in the shower.",
-        mid: "Monstera and elephant ear in the shower planter.",
-        low: "Bird's nest ferns, Boston ferns and peace lilies covering all soil."
+        tall: "Bamboo palm in the white corner pot. In the shower: slim bamboo palm plus upright heliconia / bird-of-paradise paddle leaves — not wide elephant ear or Monstera.",
+        mid: "Red ti, Dieffenbachia and bird's nest ferns filling the planter.",
+        low: "Boston ferns and peace lilies covering soil only, staying inside the planter."
       },
       buy: [
-        { plant: "bambooPalm", qty: 1, why: "Airy 2 m plant in the existing white pot" },
-        { plant: "ladyPalm", qty: 1, why: "Slim shower palm up to the glass roof" },
-        { plant: "monstera", qty: 1, why: "Big split leaves in the shower" },
-        { plant: "alocasia", qty: 1, why: "Huge tropical leaf in the shower" },
-        { plant: "nest", qty: 3, why: "Glossy rosettes that like splash and humidity" },
-        { plant: "boston", qty: 6, why: "Feathery soil cover" },
-        { plant: "peace", qty: 4, why: "White flowers, loves humidity" }
+        { plant: "bambooPalm", qty: 2, why: "Corner pot plus slim shower height" },
+        { plant: "heliconia", qty: 1, why: "Upright banana-like leaves, stays in the planter" },
+        { plant: "bop", qty: 1, why: "Paddle leaves without taking the shower floor" },
+        { plant: "cordyline", qty: 2, why: "Slim red mid-layer" },
+        { plant: "dieffenbachia", qty: 2, why: "Mid-layer volume in the planter" },
+        { plant: "nest", qty: 2, why: "Splash-proof rosettes" },
+        { plant: "boston", qty: 4, why: "Low cover inside the planter" },
+        { plant: "peace", qty: 3, why: "White flowers, humidity" }
       ]
     }
   ]
